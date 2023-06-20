@@ -1,4 +1,11 @@
-import { IsEmail, IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsObject,
+  IsString,
+  MaxLength,
+} from 'class-validator';
+import { IWeb } from 'src/schemas/user.schema';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -13,4 +20,8 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   phoneNumber: string;
+
+  @IsNotEmpty()
+  @IsObject()
+  bookWebs: IWeb;
 }

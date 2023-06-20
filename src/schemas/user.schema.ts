@@ -3,6 +3,12 @@ import mongoose, { HydratedDocument, now } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
+export interface IWeb {
+  id: number;
+  name: string;
+  price: string;
+}
+
 @Schema({ timestamps: true, validateBeforeSave: true })
 export class User {
   @Prop({
@@ -23,6 +29,12 @@ export class User {
     required: true,
   })
   phoneNumber: string;
+
+  @Prop({
+    type: mongoose.Schema.Types.Array,
+    default: [],
+  })
+  bookWebs: IWeb[];
 
   @Prop({
     type: mongoose.Schema.Types.Date,

@@ -13,10 +13,16 @@ export class UserService {
     try {
       const exist = await this.findUserByEmail(createUserDto.email);
 
-      if (exist)
-        throw new BadRequestException(
-          `This ${createUserDto.email} already exist. Please try another email address !`,
+      if (exist) {
+        return await this.userSchema.findOneAndUpdate(
+          { _id: exist._id },
+          {
+            $push: {
+              bookWebs: createUserDto.bookWebs,
+            },
+          },
         );
+      }
 
       return await this.userSchema.create(createUserDto);
     } catch (error) {
